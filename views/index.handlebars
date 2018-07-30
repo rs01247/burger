@@ -7,4 +7,36 @@
             <h1 id='burger-logo'>W E L C O M E &nbsp; T O &nbsp; B U R G E R L A N D</h1>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            {{#each burgers}} {{#unless this.devoured}}
+            <div>
+                <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+                    <button type="submit" class='burger-here'> {{this.burger_name}}</button>
+                </form>
+            </div>
+            {{/unless}} {{/each}}
+        </div>
+        <div class="col-6">
+            {{#each burgers}} {{#if this.devoured}}
+            <div class='burger-devoured'>
+                <div>
+                    {{this.burger_name}}
+                </div>
+            </div>
+            {{/if}} {{/each}}
+        </div>
+    </div>
+    <h2 class='text-center' id='burger-logo'>what would you like to order?</h2>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <form action="/burgers/create" method="POST">
+                <input type="text" id="name" name="burger_name" placeholder="Burger Name">
+                <button type="submit" class="add-burger">Submit</button>
+            </form>
+        </div>
+    </div>
+
 </div>

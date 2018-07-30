@@ -1,16 +1,22 @@
 const orm = require('../config/orm');
 
 let burger = {
-    selectAll: function(cb) {
-        orm.selectAll('burgers', function(res){
+    selectAll: function (cb) {
+        orm.selectAll('burgers', function (res) {
             cb(res);
-        })
+        });
+    },
+    insertOne: function (name, cb) {
+        orm.insertOne('burgers', [
+            'burger_name', 'devoured'
+        ], [name, false], cb);
+    },
+    updateOne: function (id, cb) {
+        let condition = `id=${id}`;
+        orm.updateOne('burgers', {
+            devoured: true
+        }, condition, cb);
     }
-}
-
-// SHOW ALL ITEMS IN BURGER TABLE
-// orm.selectAll('burgers');
-
-// orm.insertOne('burgers',)
+};
 
 module.exports = burger;    

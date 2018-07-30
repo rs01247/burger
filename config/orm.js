@@ -8,15 +8,19 @@ const orm = {
             cb(result);
         })
     },
-    insertOne: function (tableInput, colInput, userVal) {
+    insertOne: function (tableInput, colInput, userVal, cb) {
         let queryString = 'INSERT INTO ?? (??) VALUES (??)';
         conn.query(queryString, [tableInput, colInput, userVal], function (err, result) {
             if (err) throw err;
-            console.log(result);
+            cb(result);
         })
     },
-    updateOne: function () {
-        let queryString;
+    updateOne: function (tableInput, colInput, condition, cb) {
+        let queryString = 'UPDATE ?? SET ?? WHERE ??';
+        conn.query(queryString, [tableInput, colInput, condition], function (err, result) {
+            if (err) throw err;
+            cb(result);
+        })
     }
 };
 
